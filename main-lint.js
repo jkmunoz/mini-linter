@@ -22,18 +22,47 @@ let unnecessaryWords = ['extremely', 'literally', 'actually' ];
 
 //splits every part the string after a space and turns all of the elements into an array.
 const storyWords = story.split(' ');
+//Prints the length of the array.
+console.log(storyWords.length);
 
-// //Prints out the new array.
-// console.log(storyWords);
-// //Prints the length of the array.
-// console.log(storyWords.length);
-
-var filterOut = storyWords.filter(function (words) {
-    return !words.includes(unnecessaryWords);
+//When console.log-ed this will print out the storyWords array without words in the unnecessaryWords array.
+var betterWords = storyWords.filter(function (word) {
+    if (!unnecessaryWords.includes(word)) {
+        return word;
+    }
 });
 
-// var betterWords = filterOut(story, function (word) {
-//     return word;
-// });
+// counts the number of times overusedWords are used.
+let overusedCount = 0;
 
-console.log(filterOut);
+for (let i = 0; i < storyWords.length; i++) {
+    const word = storyWords[i];
+
+    for (let j = 0; j < overusedWords.length; j++) {
+        const overusedWord = overusedWords[j];
+        
+        if (word === overusedWord) {
+            overusedCount += 1;
+        }
+    }
+}
+
+//counts the number of scentences in the story. 
+let sentences = 0;
+
+for (let i = 0; i < storyWords.length; i++) {
+    const word = storyWords[i];
+    
+    if (word[word.length - 1] === '!' || word[word.length - 1] === '.') {
+        sentences += 1; 
+    }
+}
+
+console.log(`You used ${overusedCount} overused words.`);
+
+console.log(betterWords);
+
+console.log(sentences);
+
+//joins betterWords into a string w/ spaces.
+console.log(betterWords.join(' '))
